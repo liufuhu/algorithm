@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>sqrt函数实现</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function sqrt(v, t){
+            if(v <=0 ) return 0;
+            // return binarySearch(0, v, v, t);
+            return noBinarySearch(0, v, v, t);
+        }
+
+        // 迭代实现
+        function binarySearch(left, right, value, dis){
+            if(Math.abs(value - left*left) <= dis){
+                return left;
+            }
+            if(Math.abs(value - right*right) <= dis){
+                return right;
+            }
+
+            var tmp = (left + right)/2, tmpVal = tmp*tmp;
+            if(tmpVal == value){
+                return tmp;
+            }else if(tmp * tmp > value){
+                right = tmp;
+            }else{
+                left = tmp;
+            }
+            return binarySearch(left, right, value, dis);
+        }
+
+        // 非迭代实现
+        function noBinarySearch(left, right, value, dis){
+            while(left < right){
+                if(Math.abs(value - left*left) <= dis){
+                    return left;
+                }
+                if(Math.abs(value - right*right) <= dis){
+                    return right;
+                }
+
+                var tmp = (left + right)/2, tmpVal = tmp*tmp;
+                if(tmpVal == value){
+                    return tmp;
+                }else if(tmp * tmp > value){
+                    right = tmp;
+                }else{
+                    left = tmp;
+                }
+            }
+        }
+
+        console.log(sqrt(13, 0.0001));
+        console.log(sqrt(333333, 0.01));
+    </script>
+</body>
+</html>
